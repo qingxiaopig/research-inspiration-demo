@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>科学假说辩论演示 · 科研灵感</title>
+  <meta name="description" content="科研灵感平台「科学假说生成」静态演示：基于预置辩论数据，重现发起辩论、进度推进、角色发言、结论与报告的完整过程。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23c4392b'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='white'/%3E%3Ccircle cx='24' cy='10' r='1.7' fill='white'/%3E%3Ccircle cx='24' cy='22' r='1.7' fill='white'/%3E%3Ccircle cx='8' cy='22' r='1.7' fill='white'/%3E%3Ccircle cx='8' cy='10' r='1.7' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="debate.css">
+</head>
+<body class="debate-page">
+  <header class="site-header debate-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html#/home" aria-label="返回科研灵感首页">
+        <span class="brand-mark">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><circle cx="16" cy="16" r="2.4" fill="#fff"/><circle cx="24" cy="10" r="1.7" fill="#fff"/><circle cx="24" cy="22" r="1.7" fill="#fff"/><circle cx="8" cy="22" r="1.7" fill="#fff"/><circle cx="8" cy="10" r="1.7" fill="#fff"/></svg>
+        </span>
+        <span class="brand-text"><strong>科研灵感</strong><small>RESEARCH INSPIRATION</small></span>
+      </a>
+      <nav class="nav-desktop" aria-label="主导航">
+        <a class="nav-link" href="index.html#/home">平台首页</a>
+        <a class="nav-link" href="index.html#/step/hypothesis">假说与推理</a>
+        <span class="demo-pill"><i></i>静态演示</span>
+      </nav>
+      <div class="header-actions">
+        <span class="env-badge"><i></i>预置示例数据</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="debate-main">
+    <section class="debate-hero">
+      <div class="debate-kicker"><span class="kicker-dot"></span>SCIENCE HYPOTHESIS DEBATE · DEMO</div>
+      <h1 class="debate-title">科学假说生成 · 多模型辩论演示</h1>
+      <p class="debate-goal" id="debate-goal">加载议题中…</p>
+      <div class="debate-meta" id="debate-meta"></div>
+      <div class="demo-notice" role="note">
+        <strong>静态 Demo 说明</strong>
+        <p>本页运行在 GitHub Pages 上，没有后端，也不会调用任何真实模型。页面内容来自一次真实辩论运行的预置数据（preset.json / report_*.md），用于重现「发起辩论 → 进度推进 → 角色发言 → 结论与报告」的观感。</p>
+      </div>
+      <div class="debate-actions">
+        <button class="btn btn-primary" type="button" id="debate-start">发起辩论演示</button>
+        <button class="btn btn-ghost" type="button" id="debate-skip" hidden>跳过动画，直接查看结果</button>
+        <span class="debate-status" id="debate-status" role="status" aria-live="polite">等待发起</span>
+      </div>
+    </section>
+
+    <section class="progress-card" aria-label="辩论进度">
+      <div class="progress-head">
+        <div>
+          <span class="progress-label">DEBATE PROGRESS</span>
+          <strong id="progress-title">辩论尚未开始</strong>
+        </div>
+        <div class="progress-num"><b id="progress-percent">0%</b><small id="progress-elapsed">已用时 0 秒</small></div>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-track">
+        <span class="progress-fill" id="progress-fill"></span>
+      </div>
+      <ol class="stage-list" id="stage-list"></ol>
+    </section>
+
+    <section class="debate-section" id="speeches-section">
+      <div class="debate-section-head">
+        <div>
+          <span class="section-label">ROLE SPEECHES</span>
+          <h2>角色发言</h2>
+        </div>
+        <p>三位提议者独立立论，协调者汇总评判。发言按演示进度陆续出现。</p>
+      </div>
+      <div class="speech-list" id="speech-list"></div>
+    </section>
+
+    <section class="debate-section" id="conclusion-section">
+      <div class="debate-section-head">
+        <div>
+          <span class="section-label">CONCLUSION</span>
+          <h2>结论与假说</h2>
+        </div>
+        <p>协调者给出的综合结论、收敛评估与可验证假说。</p>
+      </div>
+      <div id="conclusion-body">
+        <div class="result-placeholder" id="conclusion-placeholder">辩论完成后在此展示结论。</div>
+      </div>
+    </section>
+
+    <section class="debate-section" id="report-section">
+      <div class="debate-section-head">
+        <div>
+          <span class="section-label">PRESET REPORT</span>
+          <h2>辩论报告</h2>
+        </div>
+        <p>报告为预置示例的静态 Markdown 渲染，不是本次页面实时生成。</p>
+      </div>
+      <div class="report-tabs" role="tablist" aria-label="报告视图">
+        <button class="report-tab is-active" type="button" role="tab" aria-selected="true" data-report="brief" id="tab-brief">精简报告</button>
+        <button class="report-tab" type="button" role="tab" aria-selected="false" data-report="full" id="tab-full">完整报告</button>
+        <span class="report-note">预置示例 · 静态渲染</span>
+      </div>
+      <div class="report-panel" id="report-panel" role="tabpanel" aria-labelledby="tab-brief">
+        <div class="result-placeholder">辩论完成后在此展示报告。</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer debate-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark brand-mark-sm">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><circle cx="16" cy="16" r="2.4" fill="#fff"/><circle cx="24" cy="10" r="1.7" fill="#fff"/><circle cx="24" cy="22" r="1.7" fill="#fff"/><circle cx="8" cy="22" r="1.7" fill="#fff"/><circle cx="8" cy="10" r="1.7" fill="#fff"/></svg>
+        </span>
+        <div><strong>科研灵感 · 静态 Demo</strong><small>RESEARCH INSPIRATION</small></div>
+      </div>
+      <p class="footer-demo-note">数据来源：DebateClaw 预置辩论任务 · 仅用于能力演示</p>
+    </div>
+  </footer>
+
+  <script src="preset-data.js"></script>
+  <script src="debate.js"></script>
+</body>
+</html>
