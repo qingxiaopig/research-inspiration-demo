@@ -38,7 +38,7 @@ window.RI_DATA = {
           source: "中科大项目",
           icon: "database",
           intro: "编译—存储—检索分层解耦，文献编译为三层知识库后级联检索。",
-          placeholderNote: "KnowledgeService 源码未公开，本静态 demo 仅保留能力卡片作占位展示，不提供在线体验，也不对其实现细节做额外描述。",
+          onlineDemo: { hint: "查看知识引擎说明", url: "knowledge.html", badge: "架构说明" },
           blocks: [
             {
               type: "arch",
@@ -55,7 +55,7 @@ window.RI_DATA = {
               label: "服务职责",
               items: [
                 { title: "知识编译服务", text: "把原始文献编译为文献切片、Wiki 概念条目、实体与知识图谱三层知识库。" },
-                { title: "知识检索服务", text: "基于三层知识库执行级联检索，向上层科研任务提供知识访问能力。" }
+                { title: "知识检索服务", text: "基于三层知识库执行级联检索。" }
               ]
             }
           ],

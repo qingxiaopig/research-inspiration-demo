@@ -572,7 +572,7 @@
     var demoHint = demo && demo.hint ? demo.hint : "打开静态辩论演示";
     var demoUrl = demo && demo.url ? demo.url : "";
 
-    var side = (isLive ? '<span class="live-badge"><i></i>静态演示</span>' : "") +
+    var side = (isLive ? '<span class="live-badge"><i></i>' + esc(demo.badge || "静态演示") + "</span>" : "") +
       (mod.placeholderNote ? '<span class="placeholder-badge">占位展示</span>' : "") +
       sourceTag(mod.source);
 

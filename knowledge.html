@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>知识引擎 KnowledgeService · 科研灵感</title>
+  <meta name="description" content="科研灵感平台知识引擎 KnowledgeService 静态架构说明：编译—存储—检索分层解耦，由知识编译服务与知识检索服务组成。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23c4392b'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='white'/%3E%3Ccircle cx='24' cy='10' r='1.7' fill='white'/%3E%3Ccircle cx='24' cy='22' r='1.7' fill='white'/%3E%3Ccircle cx='8' cy='22' r='1.7' fill='white'/%3E%3Ccircle cx='8' cy='10' r='1.7' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=20261125c">
+  <link rel="stylesheet" href="debate.css?v=20261125">
+  <link rel="stylesheet" href="knowledge.css?v=20261125">
+</head>
+<body class="knowledge-page">
+  <header class="site-header debate-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html#/home" aria-label="返回科研灵感首页">
+        <span class="brand-mark">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><circle cx="16" cy="16" r="2.4" fill="#fff"/><circle cx="24" cy="10" r="1.7" fill="#fff"/><circle cx="24" cy="22" r="1.7" fill="#fff"/><circle cx="8" cy="22" r="1.7" fill="#fff"/><circle cx="8" cy="10" r="1.7" fill="#fff"/></svg>
+        </span>
+        <span class="brand-text"><strong>科研灵感</strong><small>RESEARCH INSPIRATION</small></span>
+      </a>
+      <nav class="nav-desktop" aria-label="主导航">
+        <a class="nav-link" href="index.html#/home">平台首页</a>
+        <a class="nav-link" href="index.html#/step/knowledge">知识引擎</a>
+        <a class="nav-link" href="debate.html">辩论演示</a>
+      </nav>
+      <div class="header-actions">
+        <span class="env-badge"><i></i>静态架构说明</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="knowledge-main">
+    <section class="knowledge-hero">
+      <div class="debate-kicker"><span class="kicker-dot"></span>KNOWLEDGE ENGINE · STATIC OVERVIEW</div>
+      <h1 class="knowledge-title">知识引擎 <span>KnowledgeService</span></h1>
+      <p class="knowledge-lead">编译—存储—检索分层解耦，由知识编译服务与知识检索服务两个服务组成。</p>
+      <div class="knowledge-tags">
+        <span>知识编译服务</span>
+        <span>知识检索服务</span>
+        <span>三层知识库</span>
+        <span>级联检索</span>
+      </div>
+      <div class="demo-notice knowledge-notice" role="note">
+        <strong>静态说明页</strong>
+        <p>本页仅依据已有资料介绍 KnowledgeService 的架构组成，不提供在线接口，也不包含性能指标或实现细节。</p>
+      </div>
+      <div class="knowledge-actions">
+        <a class="btn btn-primary" href="index.html#/step/knowledge">返回能力详情</a>
+        <a class="btn btn-ghost" href="index.html#/home">平台首页</a>
+      </div>
+    </section>
+
+    <nav class="knowledge-anchors" aria-label="页面导航">
+      <a href="#services">两个服务</a>
+      <a href="#layers">三层知识库</a>
+      <a href="#flow">数据流</a>
+      <a href="#scope">说明与边界</a>
+    </nav>
+
+    <section class="knowledge-section" id="services">
+      <div class="debate-section-head">
+        <div>
+          <span class="section-label">SERVICES</span>
+          <h2>两个服务</h2>
+        </div>
+        <p>编译与检索分层解耦，各自承担明确的职责。</p>
+      </div>
+      <div class="service-grid">
+        <article class="knowledge-card">
+          <span class="knowledge-index">01</span>
+          <h3>知识编译服务</h3>
+          <p>把原始文献编译成三层知识库：文献切片、Wiki 概念条目、实体与知识图谱。</p>
+        </article>
+        <article class="knowledge-card">
+          <span class="knowledge-index">02</span>
+          <h3>知识检索服务</h3>
+          <p>基于这三层知识库做级联检索。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="knowledge-section" id="layers">
+      <div class="debate-section-head">
+        <div>
+          <span class="section-label">KNOWLEDGE LAYERS</span>
+          <h2>三层知识库</h2>
+        </div>
+        <p>由知识编译服务产出，作为知识检索服务的检索基础。</p>
+      </div>
+      <div class="layer-grid">
+        <article class="layer-card">
+          <span class="layer-num">第一层</span>
+          <h3>文献切片</h3>
+        </article>
+        <article class="layer-card">
+          <span class="layer-num">第二层</span>
+          <h3>Wiki 概念条目</h3>
+        </article>
+        <article class="layer-card">
+          <span class="layer-num">第三层</span>
+          <h3>实体与知识图谱</h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="knowledge-section" id="flow">
+      <div class="debate-section-head">
+        <div>
+          <span class="section-label">PIPELINE</span>
+          <h2>数据流</h2>
+        </div>
+        <p>从原始文献到级联检索的静态流程示意。</p>
+      </div>
+      <ol class="flow-list">
+        <li><span class="flow-step">输入</span><strong>原始文献</strong></li>
+        <li><span class="flow-step">编译</span><strong>知识编译服务</strong></li>
+        <li><span class="flow-step">存储</span><strong>三层知识库</strong><small>文献切片 · Wiki 概念条目 · 实体与知识图谱</small></li>
+        <li><span class="flow-step">检索</span><strong>知识检索服务</strong></li>
+        <li><span class="flow-step">结果</span><strong>级联检索</strong></li>
+      </ol>
+    </section>
+
+    <section class="knowledge-section" id="scope">
+      <div class="debate-section-head">
+        <div>
+          <span class="section-label">SCOPE</span>
+          <h2>说明与边界</h2>
+        </div>
+        <p>本页内容范围与资料来源说明。</p>
+      </div>
+      <ul class="scope-list">
+        <li>KnowledgeService 由知识编译服务与知识检索服务两个服务组成，编译、存储、检索分层解耦。</li>
+        <li>知识编译服务把原始文献编译成三层知识库：文献切片、Wiki 概念条目、实体与知识图谱。</li>
+        <li>知识检索服务基于这三层知识库做级联检索。</li>
+        <li>本页不包含接口定义、性能指标或实现细节；源码未公开，仅作架构说明。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer debate-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark brand-mark-sm">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><circle cx="16" cy="16" r="2.4" fill="#fff"/><circle cx="24" cy="10" r="1.7" fill="#fff"/><circle cx="24" cy="22" r="1.7" fill="#fff"/><circle cx="8" cy="22" r="1.7" fill="#fff"/><circle cx="8" cy="10" r="1.7" fill="#fff"/></svg>
+        </span>
+        <div><strong>科研灵感 · KnowledgeService</strong><small>RESEARCH INSPIRATION</small></div>
+      </div>
+      <p class="footer-demo-note">静态架构说明 · 仅依据已有资料整理</p>
+    </div>
+  </footer>
+</body>
+</html>
