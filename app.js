@@ -440,7 +440,12 @@
       if (!found) return "";
       var step = found.step;
       var mod = found.module;
-      return '<a class="feature-card" href="#/step/' + step.id + '">' +
+      var demoUrl = mod.onlineDemo && mod.onlineDemo.url ? mod.onlineDemo.url : "";
+      var href = demoUrl || ("#/step/" + step.id);
+      var foot = demoUrl
+        ? esc(mod.onlineDemo.hint || "打开演示") + ' <span aria-hidden="true">→</span>'
+        : "进入第 " + step.no + " 步 <span aria-hidden=\"true\">→</span>";
+      return '<a class="feature-card" href="' + esc(href) + '">' +
         '<div class="feature-top"><span class="icon-tile icon-solid">' + icon(mod.icon) + "</span>" +
         '<span class="feature-step">STEP ' + twoDigit(step.no) + " · " + esc(step.title) + "</span>" +
         '<span class="feature-source">' + sourceTag(mod.source) + "</span></div>" +
@@ -448,7 +453,7 @@
         "<h3>" + esc(mod.title) + "</h3>" +
         '<p class="feature-desc">' + esc(mod.intro) + "</p>" +
         '<div class="chips feature-chips">' + mod.points.slice(0, 3).map(function (p) { return "<span>" + esc(p) + "</span>"; }).join("") + "</div>" +
-        '<div class="feature-foot">进入第 ' + step.no + " 步 <span aria-hidden=\"true\">→</span></div>" +
+        '<div class="feature-foot">' + foot + "</div>" +
         "</a>";
     }).join("");
     return '<section class="section" id="featured">' +
