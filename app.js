@@ -444,11 +444,13 @@
       var href = demoUrl || ("#/step/" + step.id);
       var foot = demoUrl
         ? esc(mod.onlineDemo.hint || "打开演示") + ' <span aria-hidden="true">→</span>'
-        : "进入第 " + step.no + " 步 <span aria-hidden=\"true\">→</span>";
+        : mod.placeholderNote
+          ? "源码未公开 · 查看占位说明 <span aria-hidden=\"true\">→</span>"
+          : "进入第 " + step.no + " 步 <span aria-hidden=\"true\">→</span>";
       return '<a class="feature-card" href="' + esc(href) + '">' +
         '<div class="feature-top"><span class="icon-tile icon-solid">' + icon(mod.icon) + "</span>" +
         '<span class="feature-step">STEP ' + twoDigit(step.no) + " · " + esc(step.title) + "</span>" +
-        '<span class="feature-source">' + sourceTag(mod.source) + "</span></div>" +
+        '<span class="feature-source">' + (mod.placeholderNote ? '<span class="placeholder-badge">占位展示</span>' : "") + sourceTag(mod.source) + "</span></div>" +
         '<span class="module-kicker">' + esc(mod.kicker) + "</span>" +
         "<h3>" + esc(mod.title) + "</h3>" +
         '<p class="feature-desc">' + esc(mod.intro) + "</p>" +
